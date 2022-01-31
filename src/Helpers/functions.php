@@ -1,5 +1,9 @@
 <?php
 
+function test_function()
+{
+    return 'ok google';
+}
 if (! function_exists('isActive')) {
     /**
      * Set the active class to the current opened menu.

@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Laravel Installer',
+    'title' => 'Project Installer',
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
@@ -22,7 +22,7 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Laravel Installer',
+        'title'   => 'Project Installer',
         'message' => 'Easy Installation and Setup Wizard.',
         'next'    => 'Check Requirements',
     ],
@@ -46,6 +46,16 @@ return [
     'permissions' => [
         'templateTitle' => 'Step 2 | Permissions',
         'title' => 'Permissions',
+        'next' => 'Verify Envato Purchase Code',
+    ],
+    /*
+     *
+     * Verify code page translations.
+     *
+     */
+    'envato' => [
+        'templateTitle' => 'Step 3 | Verify Purchase Code',
+        'title' => 'Verify Envato Purchase Code',
         'next' => 'Configure Environment',
     ],
 
@@ -56,14 +66,14 @@ return [
      */
     'environment' => [
         'menu' => [
-            'templateTitle' => 'Step 3 | Environment Settings',
+            'templateTitle' => 'Step 4 | Environment Settings',
             'title' => 'Environment Settings',
-            'desc' => 'Please select how you want to configure the apps <code>.env</code> file.',
+            'desc' => 'Setup your <code>.env</code> file using form wizard.',
             'wizard-button' => 'Form Wizard Setup',
             'classic-button' => 'Classic Text Editor',
         ],
         'wizard' => [
-            'templateTitle' => 'Step 3 | Environment Settings | Guided Wizard',
+            'templateTitle' => 'Step 4 | Environment Settings | Guided Wizard',
             'title' => 'Guided <code>.env</code> Wizard',
             'tabs' => [
                 'environment' => 'Environment',
@@ -95,6 +105,9 @@ return [
                 'app_log_level_label_emergency' => 'emergency',
                 'app_url_label' => 'App Url',
                 'app_url_placeholder' => 'App Url',
+                'envato_purchase_code_label' => 'Envato Purchase Code',
+                'envato_purchase_code_placeholder' => '52b1fbfc-5a1d-4ec0-bce1-c7be043c7810',
+                'envato_purchase_code_failed' => 'Invalid purchase code or another application exists',
                 'db_connection_failed' => 'Could not connect to the database.',
                 'db_connection_label' => 'Database Connection',
                 'db_connection_label_mysql' => 'mysql',
@@ -158,7 +171,7 @@ return [
             ],
         ],
         'classic' => [
-            'templateTitle' => 'Step 3 | Environment Settings | Classic Editor',
+            'templateTitle' => 'Step 4 | Environment Settings | Classic Editor',
             'title' => 'Classic Environment Editor',
             'save' => 'Save .env',
             'back' => 'Use Form Wizard',
@@ -176,7 +189,7 @@ return [
      *
      */
     'installed' => [
-        'success_log_message' => 'Laravel Installer successfully INSTALLED on ',
+        'success_log_message' => 'Project Installer successfully INSTALLED on ',
     ],
 
     /*
@@ -206,7 +219,7 @@ return [
          * Shared translations.
          *
          */
-        'title' => 'Laravel Updater',
+        'title' => 'Project Updater',
 
         /*
          *
@@ -241,7 +254,7 @@ return [
         ],
 
         'log' => [
-            'success_message' => 'Laravel Installer successfully UPDATED on ',
+            'success_message' => 'Project Installer successfully UPDATED on ',
         ],
     ],
 ];

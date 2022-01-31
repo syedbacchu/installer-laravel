@@ -138,4 +138,9 @@ return [
     */
     'updaterEnabled' => 'true',
 
+    'updater_url' => 'http://149.28.199.74',
+    'env_path' => [
+        'env_token' => 'MYgnsoOUEXsTvWcjhjejKM8XhfLXLjub',
+        'env_url_path' => 'https://api.envato.com/v1/market/private/user/verify-purchase:'
+    ]
 ];

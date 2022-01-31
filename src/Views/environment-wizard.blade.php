@@ -6,7 +6,7 @@
 
 @section('title')
     <i class="fa fa-magic fa-fw" aria-hidden="true"></i>
-    {!! trans('installer_messages.environment.wizard.title') !!}
+    {!! __('Setup Environment') !!}
 @endsection
 
 @section('container')
@@ -19,20 +19,6 @@
             {{ trans('installer_messages.environment.wizard.tabs.environment') }}
         </label>
 
-        <input id="tab2" type="radio" name="tabs" class="tab-input" />
-        <label for="tab2" class="tab-label">
-            <i class="fa fa-database fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
-            {{ trans('installer_messages.environment.wizard.tabs.database') }}
-        </label>
-
-        <input id="tab3" type="radio" name="tabs" class="tab-input" />
-        <label for="tab3" class="tab-label">
-            <i class="fa fa-cogs fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
-            {{ trans('installer_messages.environment.wizard.tabs.application') }}
-        </label>
-
         <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}" class="tabs-wrap">
             <div class="tab" id="tab1content">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -41,7 +27,7 @@
                     <label for="app_name">
                         {{ trans('installer_messages.environment.wizard.form.app_name_label') }}
                     </label>
-                    <input type="text" name="app_name" id="app_name" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}" />
+                    <input type="text" name="app_name" id="app_name" value="{{old('app_name')}}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}" />
                     @if ($errors->has('app_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -61,7 +47,7 @@
                         <option value="production">{{ trans('installer_messages.environment.wizard.form.app_environment_label_production') }}</option>
                         <option value="other">{{ trans('installer_messages.environment.wizard.form.app_environment_label_other') }}</option>
                     </select>
-                    <div id="environment_text_input" style="display: none;">
+                    <div id="environment_text_input d-none">
                         <input type="text" name="environment_custom" id="environment_custom" placeholder="{{ trans('installer_messages.environment.wizard.form.app_environment_placeholder_other') }}"/>
                     </div>
                     @if ($errors->has('app_name'))
@@ -126,16 +112,6 @@
                         </span>
                     @endif
                 </div>
-
-                <div class="buttons">
-                    <button class="button" onclick="showDatabaseSettings();return false">
-                        {{ trans('installer_messages.environment.wizard.form.buttons.setup_database') }}
-                        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="tab" id="tab2content">
-
                 <div class="form-group {{ $errors->has('database_connection') ? ' has-error ' : '' }}">
                     <label for="database_connection">
                         {{ trans('installer_messages.environment.wizard.form.db_connection_label') }}
@@ -219,14 +195,6 @@
                     @endif
                 </div>
 
-                <div class="buttons">
-                    <button class="button" onclick="showApplicationSettings();return false">
-                        {{ trans('installer_messages.environment.wizard.form.buttons.setup_application') }}
-                        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="tab" id="tab3content">
                 <div class="block">
                     <input type="radio" name="appSettingsTabs" id="appSettingsTab1" value="null" checked />
                     <label for="appSettingsTab1">

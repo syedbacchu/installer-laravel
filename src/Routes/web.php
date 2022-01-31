@@ -1,6 +1,9 @@
 <?php
 
-Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' => 'RachidLaasri\LaravelInstaller\Controllers', 'middleware' => ['web', 'install']], function () {
+Route::get('test', function () {
+   dd('tested');
+});
+Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' => 'SdTech\ProjectInstaller\Controllers', 'middleware' => ['web', 'install']], function () {
     Route::get('/', [
         'as' => 'welcome',
         'uses' => 'WelcomeController@welcome',
@@ -41,6 +44,16 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' =
         'uses' => 'PermissionsController@permissions',
     ]);
 
+    Route::get('verify-purchase-code', [
+        'as' => 'verify',
+        'uses' => 'PermissionsController@verify'
+    ]);
+
+    Route::post('purchase-code/verify/process', [
+        'as' => 'codeVerifyProcess',
+        'uses' => 'PermissionsController@codeVerifyProcess'
+    ]);
+
     Route::get('database', [
         'as' => 'database',
         'uses' => 'DatabaseController@database',
@@ -50,9 +63,10 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' =
         'as' => 'final',
         'uses' => 'FinalController@finish',
     ]);
+
 });
 
-Route::group(['prefix' => 'update', 'as' => 'LaravelUpdater::', 'namespace' => 'RachidLaasri\LaravelInstaller\Controllers', 'middleware' => 'web'], function () {
+Route::group(['prefix' => 'update', 'as' => 'LaravelUpdater::', 'namespace' => 'SdTech\ProjectInstaller\Controllers', 'middleware' => 'web'], function () {
     Route::group(['middleware' => 'update'], function () {
         Route::get('/', [
             'as' => 'welcome',

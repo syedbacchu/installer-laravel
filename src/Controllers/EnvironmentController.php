@@ -1,15 +1,18 @@
 <?php
 
-namespace RachidLaasri\LaravelInstaller\Controllers;
+namespace SdTech\ProjectInstaller\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
-use RachidLaasri\LaravelInstaller\Events\EnvironmentSaved;
-use RachidLaasri\LaravelInstaller\Helpers\EnvironmentManager;
-use Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use SdTech\ProjectInstaller\Events\EnvironmentSaved;
+use SdTech\ProjectInstaller\Helpers\EnvironmentManager;
 
 class EnvironmentController extends Controller
 {
@@ -23,6 +26,7 @@ class EnvironmentController extends Controller
      */
     public function __construct(EnvironmentManager $environmentManager)
     {
+        set_time_limit(300);
         $this->EnvironmentManager = $environmentManager;
     }
 
@@ -103,16 +107,50 @@ class EnvironmentController extends Controller
             ]);
         }
 
+         if (! $this->checkForAuthentication($request)) {
+             return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
+                 'envato_purchase_code' => trans('installer_messages.environment.wizard.form.envato_purchase_code_failed'),
+             ]);
+         }
+
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->route('LaravelInstaller::database')
+        return $redirect->route('LaravelInstaller::database', ['email' => $request->admin_email, 'password' => $request->admin_password])
                         ->with(['results' => $results]);
     }
 
     /**
-     * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
+     * @param Request $request
+     * @return bool
+     */
+    private function checkForAuthentication(Request $request)
+    {
+        $license = $request->input('envato_purchase_code') ?? Cookie::get('addenvparkey');
+        if ($license == '') return false;
+        $domain = url('/');
+        $a = config('installer.updater_url', 'http://149.28.199.74') . '/register';
+        try {
+            return true;
+            $ch = curl_init($a);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['app' => config('app.project', 'laravel'), 'version' => config('app.version', 'v1.0'), 'license' => $license, 'domain' => $domain, 'email' => $request->admin_email]));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $res = json_decode($response);
+            if (is_object($res) && $res->success) {
+                return true;
+            }
+            return false;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
+
+    /**
+     *
      * Validate database connection with user credentials (Form Wizard).
      *
      * @param Request $request
@@ -120,7 +158,7 @@ class EnvironmentController extends Controller
      */
     private function checkDatabaseConnection(Request $request)
     {
-        $connection = $request->input('database_connection');
+        $connection = 'mysql';
 
         $settings = config("database.connections.$connection");
 

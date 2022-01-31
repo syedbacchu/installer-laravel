@@ -16,10 +16,8 @@
     </p>
     <div class="buttons">
         <a href="{{ route('LaravelInstaller::environmentWizard') }}" class="button button-wizard">
-            <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.menu.wizard-button') }}
-        </a>
-        <a href="{{ route('LaravelInstaller::environmentClassic') }}" class="button button-classic">
-            <i class="fa fa-code fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.menu.classic-button') }}
+            {{ __('Next') }}
+            <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
         </a>
     </div>
 

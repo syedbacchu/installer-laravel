@@ -1,6 +1,6 @@
 <?php
 
-namespace RachidLaasri\LaravelInstaller\Events;
+namespace SdTech\ProjectInstaller\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

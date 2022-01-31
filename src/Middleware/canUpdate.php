@@ -1,12 +1,12 @@
 <?php
 
-namespace RachidLaasri\LaravelInstaller\Middleware;
+namespace SdTech\ProjectInstaller\Middleware;
 
 use Closure;
 
 class canUpdate
 {
-    use \RachidLaasri\LaravelInstaller\Helpers\MigrationsHelper;
+    use \SdTech\ProjectInstaller\Helpers\MigrationsHelper;
 
     /**
      * Handle an incoming request.

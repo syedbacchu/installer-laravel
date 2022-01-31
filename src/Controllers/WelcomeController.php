@@ -1,6 +1,6 @@
 <?php
 
-namespace RachidLaasri\LaravelInstaller\Controllers;
+namespace SdTech\ProjectInstaller\Controllers;
 
 use Illuminate\Routing\Controller;
 

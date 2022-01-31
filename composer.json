@@ -1,15 +1,13 @@
 {
-    "name": "rachidlaasri/laravel-installer",
-    "description": "Laravel web installer",
+    "name": "sdtech/project-installer",
+    "description": "Simple Laravel web installer with codecanyon product validation",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "type": "library",
     "authors": [
         {
-            "name": "Rachid Laasri",
-            "email": "rashidlaasri@gmail.com"
-        },
-        {
-            "name": "Jeremy Kenedy",
-            "email": "jeremykenedy@gmail.com"
+            "name": "sd bacchu",
+            "email": "bacchu.cse11@gmail.com"
         }
     ],
     "require": {
@@ -17,21 +15,21 @@
     },
     "autoload": {
         "psr-4": {
-            "RachidLaasri\\LaravelInstaller\\": "src/"
+            "SdTech\\ProjectInstaller\\": "src/"
         },
         "files": [
             "src/Helpers/functions.php"
         ]
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "RachidLaasri\\LaravelInstaller\\Providers\\LaravelInstallerServiceProvider"
-            ]
-        }
-    },
+
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SdTech\\ProjectInstaller\\Providers\\ProjectInstallerServiceProvider"
+            ]
+        }
+    }
 }
