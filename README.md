@@ -21,3 +21,13 @@ The current features are :
 * [Laravel 5.5+](https://laravel.com/docs/installation)
 
 ## Installation
+1. From your projects root folder in terminal run:
+
+```bash
+    composer require sdtech/project-installer
+```
+2. Publish the packages views, config file, assets, and language files by running the following from your projects root folder:
+
+```bash
+    php artisan vendor:publish --tag=projectinstaller
+```
