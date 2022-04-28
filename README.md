@@ -10,7 +10,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Uses](#how to use)
+- [Uses](#Uses)
 
 ## About
 
@@ -57,7 +57,7 @@ The current features are :
 ```
  [true means verify purchase key mandatory, and false means not mandatory]
 
-## how to use
+## Uses
 1. Make a middleware and inside the middleware the code look like ->
 ```bash
 public function handle(Request $request, Closure $next)
