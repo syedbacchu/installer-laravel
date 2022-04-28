@@ -10,7 +10,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [How to use](#how to use)
+- [Uses](#how to use)
 
 ## About
 
