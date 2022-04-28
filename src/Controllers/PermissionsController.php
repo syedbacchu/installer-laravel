@@ -48,8 +48,11 @@ class PermissionsController extends Controller
         $permissions = $this->permissions->check(
             config('installer.permissions')
         );
-
-        return view('vendor.installer.verify', compact('permissions'));
+        if(config('installer.checkPurchaseCode') == true) {
+            return view('vendor.installer.verify', compact('permissions'));
+        } else {
+            return redirect()->route('LaravelInstaller::environment');
+        }
     }
 
     public function codeVerifyProcess(Request $request)

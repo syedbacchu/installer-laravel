@@ -1,8 +1,15 @@
 # installer-laravel | A Simple Laravel Project Installer with verify envato purchase licence
 
+[![Latest Version](https://img.shields.io/github/release/syedbacchu/installer-laravel.svg?style=flat-square)](https://github.com/syedbacchu/installer-laravel/releases)
+[![Issues](https://img.shields.io/github/issues/syedbacchu/installer-laravel.svg?style=flat-square)](https://github.com/syedbacchu/installer-laravel)
+[![Stars](https://img.shields.io/github/stars/syedbacchu/installer-laravel.svg?style=social)](https://github.com/syedbacchu/installer-laravel)
+[![Stars](https://img.shields.io/github/forks/syedbacchu/installer-laravel?style=flat-square)](https://github.com/syedbacchu/installer-laravel)
+[![Total Downloads](https://img.shields.io/packagist/dt/sdtech/project-installer.svg?style=flat-square)](https://packagist.org/packages/sdtech/project-installer)
+
 - [About](#about)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Configuration](#configuration)
 
 ## About
 
@@ -31,3 +38,13 @@ The current features are :
 ```bash
     php artisan vendor:publish --tag=projectinstaller
 ```
+
+##configuration
+1. Go to your config folder, then open "installer.php" file
+2. Search here "env_path", under this change the "env_token" => 'change this value and set it your codecanyon token' .
+3. 'env_path' => [
+   'env_token' => 'your envato token here',
+   'env_url_path' => 'https://api.envato.com/v1/market/private/user/verify-purchase:'
+   ]
+4. Another thing , verify purchase key is not mandatory, you can also manage this from config file->
+5. 'checkPurchaseCode' => true, [true means verify purchase key mandatory, and false means not mandatory]
