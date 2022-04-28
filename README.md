@@ -10,6 +10,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [How to use](#how to use)
 
 ## About
 
@@ -39,12 +40,35 @@ The current features are :
     php artisan vendor:publish --tag=projectinstaller
 ```
 
-##configuration
+## configuration
 1. Go to your config folder, then open "installer.php" file
 2. Search here "env_path", under this change the "env_token" => 'change this value and set it your codecanyon token' .
-3. 'env_path' => [
+3. 
+ ``` bash
+'env_path' => [
    'env_token' => 'your envato token here',
    'env_url_path' => 'https://api.envato.com/v1/market/private/user/verify-purchase:'
    ]
-4. Another thing , verify purchase key is not mandatory, you can also manage this from config file->
-5. 'checkPurchaseCode' => true, [true means verify purchase key mandatory, and false means not mandatory]
+   ```
+5. Another thing , verify purchase key is not mandatory, you can also manage this from config file->
+6. 
+```bash
+'checkPurchaseCode' => true, 
+```
+ [true means verify purchase key mandatory, and false means not mandatory]
+
+## how to use
+1. Make a middleware and inside the middleware the code look like ->
+```bash
+public function handle(Request $request, Closure $next)
+    {
+        if (file_exists(storage_path('installed'))) {
+            return $next($request);
+        }
+
+        return redirect(url('install'));
+    }
+```
+2. Then add the middleware name to your route.
+
+That's it :-)
