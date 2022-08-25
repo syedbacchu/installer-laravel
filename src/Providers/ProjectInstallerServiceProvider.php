@@ -60,9 +60,6 @@ class ProjectInstallerServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/installer.php', 'installer'
-        );
         $this->publishFiles();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
 //        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
@@ -77,6 +74,10 @@ class ProjectInstallerServiceProvider extends ServiceProvider
      */
     protected function publishFiles()
     {
+        $this->publishes([
+            __DIR__ . '/../Config/installer.php' => base_path('config/installer.php'),
+        ], 'projectinstaller');
+
         $this->publishes([
             __DIR__ . '/../assets' => public_path('installer'),
         ], 'projectinstaller');
