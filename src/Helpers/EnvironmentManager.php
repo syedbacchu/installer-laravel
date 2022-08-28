@@ -106,11 +106,28 @@ class EnvironmentManager
             'DB_PORT=' . $request->database_port . "\n" .
             'DB_DATABASE=' . $request->database_name . "\n" .
             'DB_USERNAME=' . $request->database_username . "\n" .
-            'DB_PASSWORD=' . $request->database_password . "\n\n";
-
+            'DB_PASSWORD=' . $request->database_password . "\n\n".
+            'BROADCAST_DRIVER='.$request->broadcast_driver."\n".
+            'CACHE_DRIVER='.$request->cache_driver."\n".
+            'SESSION_DRIVER='.$request->session_driver."\n".
+            'QUEUE_DRIVER='.$request->queue_driver."\n\n".
+            'REDIS_HOST='.$request->redis_hostname."\n".
+            'REDIS_PASSWORD='.$request->redis_password."\n".
+            'REDIS_PORT='.$request->redis_port."\n\n".
+            'MAIL_DRIVER='.$request->mail_driver."\n".
+            'MAIL_HOST='.$request->mail_host."\n".
+            'MAIL_PORT='.$request->mail_port."\n".
+            'MAIL_USERNAME='.$request->mail_username."\n".
+            'MAIL_PASSWORD='.$request->mail_password."\n".
+            'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
+            'PUSHER_APP_ID='.$request->pusher_app_id."\n".
+            'PUSHER_APP_KEY='.$request->pusher_app_key."\n".
+            'PUSHER_APP_SECRET='.$request->pusher_app_secret;
         try {
             file_put_contents($this->envPath, $envFileData);
-            file_put_contents(storage_path('.envapplicationKeyforverifywhichcomesfromenv'), json_encode(['license' => Cookie::get('addenvparkey')]));
+            if(config('installer.checkPurchaseCode') == true) {
+                file_put_contents(storage_path('.envapplicationKeyforverifywhichcomesfromenv'), json_encode(['license' => Cookie::get('addenvparkey')]));
+            }
         } catch (Exception $e) {
             $results = trans('installer_messages.environment.errors');
         }

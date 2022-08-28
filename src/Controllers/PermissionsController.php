@@ -69,7 +69,11 @@ class PermissionsController extends Controller
 //            return view('vendor.installer.verify', compact('errors'));
             return redirect()->back()->with(['errors' => $errors]);
         } else {
-            $check = $this->checkEnvatoPurchaseCode($request);
+            if (config('installer.demoPurchaseCodeAllow') == true && config('installer.demoPurchaseCode') == $request->purchase_code) {
+                $check = $this->checkDemoPurchaseCode($request);
+            } else {
+                $check = $this->checkEnvatoPurchaseCode($request);
+            }
             if ($check['success'] == false) {
                 return redirect()->back()->with(['message' => $check['message']]);
             } else {
@@ -78,6 +82,22 @@ class PermissionsController extends Controller
         }
     }
 
+    // check demo purchase code
+    public function checkDemoPurchaseCode($request)
+    {
+        $response = ['success' => false, 'message' => __('Invalid request')];
+        try {
+            $demoCode = config('installer.demoPurchaseCode');
+            if ($request->purchase_code == $demoCode) {
+                $response = ['success' => true, 'message' => __('Purchase code verified successfully.')];
+            } else {
+                $response = ['success' => false, 'message' => __('Invalid code')];
+            }
+        } catch (\Exception $e) {
+            $response = ['success' => false, 'message' => __('Invalid request')];
+        }
+        return $response;
+    }
     // check envato purchase code
     public function checkEnvatoPurchaseCode($request)
     {
