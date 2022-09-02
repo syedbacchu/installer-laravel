@@ -20,7 +20,6 @@ class DatabaseController extends Controller
      */
     public function __construct(DatabaseManager $databaseManager)
     {
-        set_time_limit(300);
         $this->databaseManager = $databaseManager;
     }
 
@@ -33,8 +32,14 @@ class DatabaseController extends Controller
     public function database(Request $request)
     {
         $response = $this->databaseManager->migrateAndSeed();
-        event(new AddingInstallerSuperAdmin($request));
-        return redirect()->route('LaravelInstaller::final')
-                         ->with(['message' => $response]);
+        if($response['status'] == 'error') {
+            return redirect()->route('LaravelInstaller::environmentWizard')
+                ->with(['message' => $response]);
+        } else {
+            $this->databaseManager->passportInstall();
+
+            return redirect()->route('LaravelInstaller::final')
+                ->with(['message' => $response]);
+        }
     }
 }

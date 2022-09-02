@@ -25,6 +25,19 @@ class DatabaseManager
         return $this->migrate($outputLog);
     }
 
+    public function passportInstall()
+    {
+        $outputLog = new BufferedOutput;
+        try {
+            Artisan::call('passport:install',[], $outputLog);
+        }
+        catch(Exception $e) {
+            return $this->response($e->getMessage(), 'error', $outputLog);
+        }
+
+        return $this->migrate($outputLog);
+    }
+
     /**
      * Run the migration and call the seeder.
      *

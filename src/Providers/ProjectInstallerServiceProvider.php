@@ -62,7 +62,6 @@ class ProjectInstallerServiceProvider extends ServiceProvider
     {
         $this->publishFiles();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
-//        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
     }
